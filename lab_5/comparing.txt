@@ -1,0 +1,1 @@
+N L Time(sec): Strassen, Trivial Ts / Tt
