@@ -11,12 +11,12 @@ using namespace std::chrono;
 const int MAXN = 256;
 int MAXS = 2;
 
-// дані для швидкісного тесту
+// РґР°РЅС– РґР»СЏ С€РІРёРґРєС–СЃРЅРѕРіРѕ С‚РµСЃС‚Сѓ
 const int T = 5;
 int tn[T] = {32, 64, 128, 128, 256};
 int ts[T] = {16, 32, 32, 64, 128};
 
-// структура для роботи з квадратними матрицями
+// СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ СЂРѕР±РѕС‚Рё Р· РєРІР°РґСЂР°С‚РЅРёРјРё РјР°С‚СЂРёС†СЏРјРё
 struct SquareMatrix {
 	int n;
 	int **x;
@@ -64,7 +64,7 @@ struct SquareMatrix {
 	}
 };
 
-// обчистлити суму матриць
+// РѕР±С‡РёСЃС‚Р»РёС‚Рё СЃСѓРјСѓ РјР°С‚СЂРёС†СЊ
 SquareMatrix operator + (SquareMatrix a, SquareMatrix b) {
 	SquareMatrix c(a.n);
 	for (int i = 0; i < a.n; i++) {
@@ -75,7 +75,7 @@ SquareMatrix operator + (SquareMatrix a, SquareMatrix b) {
 	return c;
 }
 
-// обчислити різницю матриць
+// РѕР±С‡РёСЃР»РёС‚Рё СЂС–Р·РЅРёС†СЋ РјР°С‚СЂРёС†СЊ
 SquareMatrix operator - (SquareMatrix a, SquareMatrix b) {
 	SquareMatrix c(a.n);
 	for (int i = 0; i < a.n; i++) {
@@ -86,7 +86,7 @@ SquareMatrix operator - (SquareMatrix a, SquareMatrix b) {
 	return c;
 }
 
-// порівняти матриці на рівність
+// РїРѕСЂС–РІРЅСЏС‚Рё РјР°С‚СЂРёС†С– РЅР° СЂС–РІРЅС–СЃС‚СЊ
 bool operator == (SquareMatrix a, SquareMatrix b) {
 	for (int i = 0; i < a.n; i++) {
 		for (int j = 0; j < a.n; j++) {
@@ -98,7 +98,7 @@ bool operator == (SquareMatrix a, SquareMatrix b) {
 	return true;
 }
 
-// вивидення n перших рядків та m перших стовпців матриці a
+// РІРёРІРёРґРµРЅРЅСЏ n РїРµСЂС€РёС… СЂСЏРґРєС–РІ С‚Р° m РїРµСЂС€РёС… СЃС‚РѕРІРїС†С–РІ РјР°С‚СЂРёС†С– a
 void print(int n, int m, SquareMatrix a) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
@@ -108,7 +108,7 @@ void print(int n, int m, SquareMatrix a) {
 	}
 }
 
-// розділення матриці на 4 блочні однакового розміру
+// СЂРѕР·РґС–Р»РµРЅРЅСЏ РјР°С‚СЂРёС†С– РЅР° 4 Р±Р»РѕС‡РЅС– РѕРґРЅР°РєРѕРІРѕРіРѕ СЂРѕР·РјС–СЂСѓ
 void divide(SquareMatrix a, SquareMatrix& a11, SquareMatrix& a12, SquareMatrix& a21, SquareMatrix& a22) {
 	for (int i = 0; i < a.n / 2; i++) {
 		for (int j = 0; j < a.n / 2; j++) {
@@ -132,7 +132,7 @@ void divide(SquareMatrix a, SquareMatrix& a11, SquareMatrix& a12, SquareMatrix& 
 	}
 }
 
-// об'єднання блочних матриць
+// РѕР±'С”РґРЅР°РЅРЅСЏ Р±Р»РѕС‡РЅРёС… РјР°С‚СЂРёС†СЊ
 void unite(SquareMatrix& a, SquareMatrix a11, SquareMatrix a12, SquareMatrix a21, SquareMatrix a22) {
 	for (int i = 0; i < a.n / 2; i++) {
 		for (int j = 0; j < a.n / 2; j++) {
@@ -156,7 +156,7 @@ void unite(SquareMatrix& a, SquareMatrix a11, SquareMatrix a12, SquareMatrix a21
 	}
 };
 
-// звичайний алгоритм множення матриць за O(n^3)
+// Р·РІРёС‡Р°Р№РЅРёР№ Р°Р»РіРѕСЂРёС‚Рј РјРЅРѕР¶РµРЅРЅСЏ РјР°С‚СЂРёС†СЊ Р·Р° O(n^3)
 SquareMatrix trivialProduct(SquareMatrix a, SquareMatrix b) {
 	SquareMatrix c(a.n);
 	for (int i = 0; i < a.n; i++) {
@@ -170,18 +170,18 @@ SquareMatrix trivialProduct(SquareMatrix a, SquareMatrix b) {
 	return c;
 }
 
-// алгоритм Штрассена
+// Р°Р»РіРѕСЂРёС‚Рј РЁС‚СЂР°СЃСЃРµРЅР°
 SquareMatrix operator * (SquareMatrix a, SquareMatrix b) {
-	// якщо матриці доволі малі, перемножити їх тривіально
+	// СЏРєС‰Рѕ РјР°С‚СЂРёС†С– РґРѕРІРѕР»С– РјР°Р»С–, РїРµСЂРµРјРЅРѕР¶РёС‚Рё С—С… С‚СЂРёРІС–Р°Р»СЊРЅРѕ
 	if (a.n <= MAXS) {
 		return trivialProduct(a, b);
 	}
-	// поділ кожної матриці a і b на 4 блочні матриці
+	// РїРѕРґС–Р» РєРѕР¶РЅРѕС— РјР°С‚СЂРёС†С– a С– b РЅР° 4 Р±Р»РѕС‡РЅС– РјР°С‚СЂРёС†С–
 	SquareMatrix a11(a.n / 2), a12(a.n / 2), a21(a.n / 2), a22(a.n / 2);
 	SquareMatrix b11(a.n / 2), b12(a.n / 2), b21(a.n / 2), b22(a.n / 2);
 	divide(a, a11, a12, a21, a22);
 	divide(b, b11, b12, b21, b22);
-	// обчислення проміжних матриць pk
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ РїСЂРѕРјС–Р¶РЅРёС… РјР°С‚СЂРёС†СЊ pk
 	SquareMatrix p1 = (a11 + a22)  * (b11 + b22);
 	SquareMatrix p2 = (a21 + a22) * b11;
 	SquareMatrix p3 = a11 * (b12 - b22);
@@ -189,12 +189,12 @@ SquareMatrix operator * (SquareMatrix a, SquareMatrix b) {
 	SquareMatrix p5 = (a11 + a12) * b22;
 	SquareMatrix p6 = (a21 - a11) * (b11 + b12);
 	SquareMatrix p7 = (a12 - a22) * (b21 + b22);
-	// обчислення складових матриці cij
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ СЃРєР»Р°РґРѕРІРёС… РјР°С‚СЂРёС†С– cij
 	SquareMatrix c11 = p1 + p4 - p5 + p7;
 	SquareMatrix c12 = p3 + p5;
 	SquareMatrix c21 = p2 + p4;
 	SquareMatrix c22 = p1 - p2 + p3 + p6;
-	// об'єднання блочних матриць у єдину матрицю c
+	// РѕР±'С”РґРЅР°РЅРЅСЏ Р±Р»РѕС‡РЅРёС… РјР°С‚СЂРёС†СЊ Сѓ С”РґРёРЅСѓ РјР°С‚СЂРёС†СЋ c
 	SquareMatrix c(a.n);
 	unite(c, c11, c12, c21, c22);
 	return c;
@@ -202,15 +202,15 @@ SquareMatrix operator * (SquareMatrix a, SquareMatrix b) {
 
 int **a, **b;
 
-// тест для користувача
+// С‚РµСЃС‚ РґР»СЏ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°
 void userTest() {
-	// зчитування назви вхідного файлу
+	// Р·С‡РёС‚СѓРІР°РЅРЅСЏ РЅР°Р·РІРё РІС…С–РґРЅРѕРіРѕ С„Р°Р№Р»Сѓ
 	cout << "Enter filename: ";
 	string fileName;
 	cin >> fileName;
 	ifstream cin(fileName);
 	
-	// зчитування вхідних даних
+	// Р·С‡РёС‚СѓРІР°РЅРЅСЏ РІС…С–РґРЅРёС… РґР°РЅРёС…
 	int n, m, k;
 	cin >> n >> m >> k;
 	for (int i = 0; i < n; i++) {
@@ -223,22 +223,22 @@ void userTest() {
 			cin >> b[i][j];
 		}
 	}
-	// створення квадратних матриць
-	// з розміром степені двійки із вхідних матриць
+	// СЃС‚РІРѕСЂРµРЅРЅСЏ РєРІР°РґСЂР°С‚РЅРёС… РјР°С‚СЂРёС†СЊ
+	// Р· СЂРѕР·РјС–СЂРѕРј СЃС‚РµРїРµРЅС– РґРІС–Р№РєРё С–Р· РІС…С–РґРЅРёС… РјР°С‚СЂРёС†СЊ
 	SquareMatrix sa(a, n, m);
 	SquareMatrix sb(b, m, k);
-	// обчислення добутку a і b за алгоритмом Штрассена
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ РґРѕР±СѓС‚РєСѓ a С– b Р·Р° Р°Р»РіРѕСЂРёС‚РјРѕРј РЁС‚СЂР°СЃСЃРµРЅР°
 	SquareMatrix sc = sa * sb;
 	cout << endl;
 	cout << "Strassen algorithm:" << endl;
 	print(n, k, sc);
 	cout << endl;
-	// обчислення добутку a і b за тривіальним алгоритмом
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ РґРѕР±СѓС‚РєСѓ a С– b Р·Р° С‚СЂРёРІС–Р°Р»СЊРЅРёРј Р°Р»РіРѕСЂРёС‚РјРѕРј
 	SquareMatrix sct = trivialProduct(sa, sb);
 	cout << "Trivial algorithm:" << endl;
 	print(n, k, sct);
 	cout << endl;
-	// перевірка коректності множення
+	// РїРµСЂРµРІС–СЂРєР° РєРѕСЂРµРєС‚РЅРѕСЃС‚С– РјРЅРѕР¶РµРЅРЅСЏ
 	if (sc == sct) {
 		cout << "Correct" << endl;
 	} else {
@@ -246,7 +246,7 @@ void userTest() {
 	}
 }
 
-// генерація випадкового масиву розмірності n x n
+// РіРµРЅРµСЂР°С†С–СЏ РІРёРїР°РґРєРѕРІРѕРіРѕ РјР°СЃРёРІСѓ СЂРѕР·РјС–СЂРЅРѕСЃС‚С– n x n
 void generate(int n) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
@@ -256,8 +256,8 @@ void generate(int n) {
 	}
 }
 
-// виконання тесту на швидкість
-// результат записується в файл comparing.txt
+// РІРёРєРѕРЅР°РЅРЅСЏ С‚РµСЃС‚Сѓ РЅР° С€РІРёРґРєС–СЃС‚СЊ
+// СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїРёСЃСѓС”С‚СЊСЃСЏ РІ С„Р°Р№Р» comparing.txt
 void complexityTest() {
 	ofstream fout("comparing.txt");
 	fout << "N L Time(sec): Strassen, Trivial Ts / Tt" << endl;
@@ -287,14 +287,14 @@ void complexityTest() {
 }
 
 int main() {
-	// виділення пам'яті під матриці a та b
+	// РІРёРґС–Р»РµРЅРЅСЏ РїР°Рј'СЏС‚С– РїС–Рґ РјР°С‚СЂРёС†С– a С‚Р° b
 	a = new int*[MAXN];
 	b = new int*[MAXN];
 	for (int i = 0; i < MAXN; i++) {
 		a[i] = new int[MAXN];
 		b[i] = new int[MAXN];
 	}
-	// виконання тесту користувача
+	// РІРёРєРѕРЅР°РЅРЅСЏ С‚РµСЃС‚Сѓ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°
 	userTest(); 
 	//complexityTest();
 }
