@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// обчислення префікс-функції рядка s
+// РѕР±С‡РёСЃР»РµРЅРЅСЏ РїСЂРµС„С–РєСЃ-С„СѓРЅРєС†С–С— СЂСЏРґРєР° s
 vector <int> prefixFunction(string s) {
 	vector <int> p(s.size());
 	p[0] = 0;
@@ -28,15 +28,15 @@ vector <int> prefixFunction(string s) {
 }
 
 bool boyer_moore(string a, string b) {
-	// обчислення таблиці стоп-символів
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ С‚Р°Р±Р»РёС†С– СЃС‚РѕРї-СЃРёРјРІРѕР»С–РІ
 	map <char, int> stopTable;
 	for (int i = 0; i < a.length(); i++) {
 		stopTable[a[i]] = i;
 	}
-	// обчислення префікс функції a та перевернутого рядка a
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ РїСЂРµС„С–РєСЃ С„СѓРЅРєС†С–С— a С‚Р° РїРµСЂРµРІРµСЂРЅСѓС‚РѕРіРѕ СЂСЏРґРєР° a
 	string ra(a.rbegin(), a.rend());
 	vector<int> p = prefixFunction(a), pr = prefixFunction(ra);
-	// обчислення таблиці суфіксів
+	// РѕР±С‡РёСЃР»РµРЅРЅСЏ С‚Р°Р±Р»РёС†С– СЃСѓС„С–РєСЃС–РІ
 	map <int, int> suffixTable;
 	for (int i = 0; i < a.length() + 1; i++) {
 		suffixTable[i] = a.length() - p.back();
@@ -45,8 +45,8 @@ bool boyer_moore(string a, string b) {
 		int j = pr[i];
 		suffixTable[j] = min(suffixTable[j], i - pr[i] + 1);
 	}
-	// зміщення шаблону за допомогою
-	// префікс-функції, таблиць суфіксів та стоп-символів
+	// Р·РјС–С‰РµРЅРЅСЏ С€Р°Р±Р»РѕРЅСѓ Р·Р° РґРѕРїРѕРјРѕРіРѕСЋ
+	// РїСЂРµС„С–РєСЃ-С„СѓРЅРєС†С–С—, С‚Р°Р±Р»РёС†СЊ СЃСѓС„С–РєСЃС–РІ С‚Р° СЃС‚РѕРї-СЃРёРјРІРѕР»С–РІ
 	int shift = 0;
 	while (shift <= b.length() - a.length()) {
 		int pos = a.length() - 1;
@@ -69,16 +69,16 @@ bool boyer_moore(string a, string b) {
 }
 
 int main() {
-	// зчитування назви вхідного файлу
+	// Р·С‡РёС‚СѓРІР°РЅРЅСЏ РЅР°Р·РІРё РІС…С–РґРЅРѕРіРѕ С„Р°Р№Р»Сѓ
 	cout << "Enter filename: ";
 	string fileName;
 	cin >> fileName;
 	ifstream cin(fileName);
 	
-	// зчитування вхідних даних
+	// Р·С‡РёС‚СѓРІР°РЅРЅСЏ РІС…С–РґРЅРёС… РґР°РЅРёС…
 	string a, b;
 	cin >> a >> b;
-	// перевірка входження a у b за допомогою алгоритма Бойєра-Мура
+	// РїРµСЂРµРІС–СЂРєР° РІС…РѕРґР¶РµРЅРЅСЏ a Сѓ b Р·Р° РґРѕРїРѕРјРѕРіРѕСЋ Р°Р»РіРѕСЂРёС‚РјР° Р‘РѕР№С”СЂР°-РњСѓСЂР°
 	if (boyer_moore(a, b)) {
 		cout << "YES" << endl;
 	} else {
