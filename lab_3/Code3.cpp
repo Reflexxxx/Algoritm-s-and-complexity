@@ -10,21 +10,21 @@ int n, d;
 
 
 
-void swap(float &a, float &b) {                      // поміняти елементи місцями
+void swap(float &a, float &b) {                      // РїРѕРјС–РЅСЏС‚Рё РµР»РµРјРµРЅС‚Рё РјС–СЃС†СЏРјРё
 	int c = a;
 	a = b;
 	b = c;
 }
 
 
-void buildHEAP() {							        // побудова піраміди
+void buildHEAP() {							        // РїРѕР±СѓРґРѕРІР° РїС–СЂР°РјС–РґРё
 	for (int i = n - 1; i >= 0; i--) {
 		heapify(i);
 	}
 }
 
 
-void printHEAP() {								    // виведення піраміди
+void printHEAP() {								    // РІРёРІРµРґРµРЅРЅСЏ РїС–СЂР°РјС–РґРё
 	cout << "Heap: ";
 	for (int i = 0; i < n; i++) {
 		cout << h[i] << " ";
@@ -33,13 +33,13 @@ void printHEAP() {								    // виведення піраміди
 }
 
 
-void vstavka(float v) {								// вставка
+void vstavka(float v) {								// РІСЃС‚Р°РІРєР°
 	n++;
 	increaseKey(n - 1, v);
 }
 
 
-void heapify(int i) {								// зменшення значення ключа
+void heapify(int i) {								// Р·РјРµРЅС€РµРЅРЅСЏ Р·РЅР°С‡РµРЅРЅСЏ РєР»СЋС‡Р°
 	int maxP = i;
 	float maxV = h[i];
 	for (int k = 1; k <= d; k++) {
@@ -58,7 +58,7 @@ void heapify(int i) {								// зменшення значення ключа
 	}
 }
 
-void increaseKey(int i, float v) {					 // збільшення значення ключа
+void increaseKey(int i, float v) {					 // Р·Р±С–Р»СЊС€РµРЅРЅСЏ Р·РЅР°С‡РµРЅРЅСЏ РєР»СЋС‡Р°
 	if (i == 0) {
 		h[0] = v;
 		return;
@@ -73,7 +73,7 @@ void increaseKey(int i, float v) {					 // збільшення значення ключа
 	}
 }
 
-float extractMax() {								 // видалення та повернення максимального значення
+float extractMax() {								 // РІРёРґР°Р»РµРЅРЅСЏ С‚Р° РїРѕРІРµСЂРЅРµРЅРЅСЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРЅСЏ
 	float maxV = h[0];
 	swap(h[0], h[n - 1]);
 	n--;
@@ -83,16 +83,16 @@ float extractMax() {								 // видалення та повернення максимального значення
 
 
 int main() {
-	// зчитуемо дані які подаються на вхід
+	// Р·С‡РёС‚СѓРµРјРѕ РґР°РЅС– СЏРєС– РїРѕРґР°СЋС‚СЊСЃСЏ РЅР° РІС…С–Рґ
 	cin >> n >> d;
 	for (int i = 0; i < n; i++) {
 		cin >> h[i];
 	}
 	
-	// будуемо піраміду
+	// Р±СѓРґСѓРµРјРѕ РїС–СЂР°РјС–РґСѓ
 	buildHEAP();
 	printHEAP();
-	// опрацьовуемо запити 
+	// РѕРїСЂР°С†СЊРѕРІСѓРµРјРѕ Р·Р°РїРёС‚Рё 
 	string op;
 	while (cin >> op) {
 		if (op == "inc") {
